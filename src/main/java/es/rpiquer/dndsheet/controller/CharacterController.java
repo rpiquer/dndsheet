@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.stream.Stream;
 
 @RequestMapping(CharacterController.CHARACTERS)
@@ -57,8 +59,13 @@ public class CharacterController {
                         }
         );
         long totalRecords = characterService.getTotalNumberOfRecords();
+        /*characterResponseStream.forEach(character -> {this.removeDataFromResponse(character);});*/
+        List<CharacterResponse> characterResponseList = characterResponseStream.toList();
+        characterResponseList.forEach(character -> {
+                character.setHp(null);
+                this.removeDataFromResponse(character);});
         Response response = Response.builder()
-                .data(characterResponseStream)
+                .data(characterResponseList)
                 .totalRecords(totalRecords)
                 .build();
 
@@ -76,6 +83,14 @@ public class CharacterController {
                 .toCharacterResponse(
                         characterService.findById(id)
                 );
+
+        characterResponse.setStrMod();
+        characterResponse.setDexMod();
+        characterResponse.setConMod();
+        characterResponse.setInteMod();
+        characterResponse.setWisMod();
+        characterResponse.setChaMod();
+        characterResponse.setHp();
         this.removeDataFromResponse(characterResponse);
         return Response
                 .builder()
@@ -90,6 +105,7 @@ public class CharacterController {
                 .mapper
                 .toCharacterDTO(characterRequest);
         Validation.validate(characterDTO);
+
         CharacterResponse characterResponse = CharacterMapper
         .mapper
         .toCharacterResponse(

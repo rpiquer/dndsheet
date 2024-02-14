@@ -24,7 +24,8 @@ public class CharacterEntity {
     private int inte;
     private int wis;
     private int cha;
-
+    
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "race_id")
     private RaceEntity raceEntity;
@@ -32,4 +33,5 @@ public class CharacterEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "playercharacter_id")
     private List<LevelEntity> levelListEntity;
+
 }

@@ -47,7 +47,6 @@ public interface CharacterMapper {
                 .toList();
     }
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "raceDTO", expression = "java(RaceMapper.mapper.toRaceDTO(characterRequest.getRaceRequest()))")
     @Mapping(target = "levelListDTO", expression = "java(mapLevelListRequestToLevelListDTO(characterRequest.getLevelListRequest()))")
     CharacterDTO toCharacterDTO(CharacterRequest characterRequest);

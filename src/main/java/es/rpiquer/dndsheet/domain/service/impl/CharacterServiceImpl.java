@@ -20,6 +20,7 @@ import es.rpiquer.dndsheet.domain.repository.RaceRepository;
 import es.rpiquer.dndsheet.domain.service.CharacterService;
 import es.rpiquer.dndsheet.mapper.CharacterMapper;
 import es.rpiquer.dndsheet.mapper.LevelMapper;
+import jakarta.validation.ValidationException;
 
 @Service
 public class CharacterServiceImpl implements CharacterService{
@@ -73,6 +74,10 @@ public class CharacterServiceImpl implements CharacterService{
     public CharacterDTO create(CharacterDTO characterDTO) {
         Character character = CharacterMapper.mapper.toCharacter(characterDTO);
         this.addRaceDTO(character, characterDTO.getRaceDTO());
+
+        if (character.getAge() > character.getRace().getMaxAge()+10) {
+            throw new ValidationException("La edad no puede sobrepasar tanto la edad máxima de la raza.");
+        }
 
         List<LevelDTO> levelListDTO = characterDTO.getLevelListDTO();
         List<Level> levelList = levelListDTO.stream().map(LevelMapper.mapper::toLevel).toList();

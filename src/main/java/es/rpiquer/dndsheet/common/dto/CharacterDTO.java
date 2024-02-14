@@ -2,9 +2,9 @@ package es.rpiquer.dndsheet.common.dto;
 
 import java.util.List;
 
+import es.rpiquer.dndsheet.common.dto.validation.ValidAttribute;
 import es.rpiquer.dndsheet.common.exception.DTOValidationException;
 import jakarta.annotation.Nullable;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
 
@@ -23,28 +23,22 @@ public class CharacterDTO {
     @Nullable
     private String deity;
     @Nullable
-    @Min(value = 1, message = "El atributo debe ser 1 o mayor.")
-    @Max(value = 20, message = "El atributo debe ser 20 o menor.")
+    @ValidAttribute
     private Integer str;
     @Nullable
-    @Min(value = 1, message = "El atributo debe ser 1 o mayor.")
-    @Max(value = 20, message = "El atributo debe ser 20 o menor.")
+    @ValidAttribute
     private Integer dex;
     @Nullable
-    @Min(value = 1, message = "El atributo debe ser 1 o mayor.")
-    @Max(value = 20, message = "El atributo debe ser 20 o menor.")
+    @ValidAttribute
     private Integer con;
     @Nullable
-    @Min(value = 1, message = "El atributo debe ser 1 o mayor.")
-    @Max(value = 20, message = "El atributo debe ser 20 o menor.")
+    @ValidAttribute
     private Integer inte;
     @Nullable
-    @Min(value = 1, message = "El atributo debe ser 1 o mayor.")
-    @Max(value = 20, message = "El atributo debe ser 20 o menor.")
+    @ValidAttribute
     private Integer wis;
     @Nullable
-    @Min(value = 1, message = "El atributo debe ser 1 o mayor.")
-    @Max(value = 20, message = "El atributo debe ser 20 o menor.")
+    @ValidAttribute
     private Integer cha;
     @Nullable
     private RaceDTO raceDTO;

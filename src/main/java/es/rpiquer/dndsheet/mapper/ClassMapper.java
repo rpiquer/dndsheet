@@ -28,7 +28,6 @@ public interface ClassMapper {
     @Mapping(target = "link", ignore = true)
     ClassResponse toClassResponse(ClassDTO classDTO);
 
-    @Mapping(target = "id", ignore = true)
     ClassDTO toClassDTO(ClassRequest classRequest);
 
     void updateClassFromClassDTO(ClassDTO classDTO, @MappingTarget Class characterClass);

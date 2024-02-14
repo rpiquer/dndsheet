@@ -97,7 +97,7 @@ public class RaceController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}/movies")
-    public Response findMoviesByDirectorId(@PathVariable("id") int id) {
+    public Response findMoviesByRaceId(@PathVariable("id") int id) {
         Stream<CharacterDTO> characterDTOStream = characterService.findByRaceId(id);
         Stream<CharacterResponse> characterResponseStream =
                 characterDTOStream.map(

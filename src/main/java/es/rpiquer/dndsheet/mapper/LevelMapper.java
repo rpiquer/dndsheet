@@ -30,7 +30,6 @@ public interface LevelMapper {
     LevelDTO toLevelDTO(LevelRequest levelRequest);
 
     @Mapping(target = "classEntity", expression = "java(ClassMapper.mapper.toClassEntity(levelDTO.getClassDTO()))")
-    @Mapping(target = "id", ignore = true)
     LevelEntity toLevelEntity(LevelDTO levelDTO);
 
     @Mapping(target = "classResponse", expression = "java(ClassMapper.mapper.toClassResponse(levelDTO.getClassDTO()))")
